@@ -1,6 +1,7 @@
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
+let AYLIENTextAPI = require('aylien_textapi')
 
 const app = express()
 
