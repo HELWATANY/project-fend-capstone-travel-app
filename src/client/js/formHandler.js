@@ -13,16 +13,7 @@ async function handleSubmit(event) {
     }
 
     console.log("::: Form Submitted :::")
-    // fetch('http://localhost:3000/test')
-    // .then(res => res.json())
-    // .then(function(res) {
-    //     document.getElementById('results').innerHTML = res.message
-    // })
-
-    let res = await asyncGet('http://localhost:3000/test')
     let analysis = await asyncPost('http://localhost:3000/sentiment-analysis', {text})
-
-    console.log(analysis)
 
     if (analysis) {
         for (let [key, value] of Object.entries(analysis)) {
@@ -35,8 +26,6 @@ async function handleSubmit(event) {
             }
         }
     }
-
-    // document.getElementById('results').innerHTML = res.message
 }
 
 export { handleSubmit }
