@@ -1,7 +1,7 @@
 function validateForm(formText) {
     let valid = true;
     let errorMassagesArr = [];
-    let errorMsg = 'Please check the following errors';
+    let errorMsg = null;
 
     if (!formText) {
         valid = false;
@@ -15,12 +15,15 @@ function validateForm(formText) {
 
     if (formText && formText.length > 280) {
         valid = false;
-        errorMassagesArr.push('Statement must be more 280 characters or less.');
+        errorMassagesArr.push('Statement must be 280 characters or less.');
     }
 
-    errorMassagesArr.forEach(msg => {
-        errorMsg += `\n  - ${msg}`
-    });
+    if (!valid) {
+        errorMsg = 'Please check the following errors'
+        errorMassagesArr.forEach(msg => {
+            errorMsg += `\n  - ${msg}`
+        });
+    }
 
     return {
         valid,
