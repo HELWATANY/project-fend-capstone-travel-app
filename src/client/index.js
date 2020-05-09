@@ -5,10 +5,10 @@ import './styles/header.scss'
 import './styles/form.scss'
 import './styles/footer.scss'
 
-import { checkForName } from './js/nameChecker'
+import { validateForm } from './js/validateForm'
 import { handleSubmit } from './js/formHandler'
 
 export {
-  checkForName,
+  validateForm,
   handleSubmit
 }

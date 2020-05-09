@@ -60,6 +60,8 @@ app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
+app.post('/sentiment-analysis',handlePostStatement)
+
 
 /**
  * CALLBACK FUNCTIONS
@@ -69,4 +71,17 @@ function listening() {
     console.log('Website running at:')
     console.log(`  - Local: http://localhost:${port}`)
     console.log(`  - Network: http://${ip.address()}:${port}`)
+}
+
+// Post new statement callback
+function handlePostStatement(req, res) {
+    const { text } = req.body
+    textapi.sentiment({
+        text,
+        mode: 'tweet'
+    }, (error, response) => {
+        if (error === null) {
+            res.send(response);
+        }
+    });
 }
