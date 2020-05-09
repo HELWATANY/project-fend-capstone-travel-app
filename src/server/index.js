@@ -42,7 +42,7 @@ app.use(cors())
 app.use(express.static('dist'))
 
 // Setup Server Port
-const port = 3000
+const port = 8080
 
 // Setup Server
 const server = app.listen(port, listening)
