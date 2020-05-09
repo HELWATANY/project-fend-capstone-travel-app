@@ -9,6 +9,7 @@ async function handleSubmit(event) {
 
     if (!formValidation.valid) {
         alert(formValidation.errorMsg)
+        return
     }
 
     console.log("::: Form Submitted :::")
@@ -22,6 +23,18 @@ async function handleSubmit(event) {
     let analysis = await asyncPost('http://localhost:3000/sentiment-analysis', {text})
 
     console.log(analysis)
+
+    if (analysis) {
+        for (let [key, value] of Object.entries(analysis)) {
+            if (typeof value === 'number') {
+                value = (value * 100).toFixed(2) + '%'
+            }
+
+            if (document.getElementById(key)) {
+                document.getElementById(key).innerHTML = value
+            }
+        }
+    }
 
     // document.getElementById('results').innerHTML = res.message
 }
