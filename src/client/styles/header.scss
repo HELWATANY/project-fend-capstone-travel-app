@@ -1,5 +1,38 @@
+@import "variables";
+
 header {
     display: flex;
     justify-content: space-between;
-    padding: 10px 40px;
+    padding: 15px 40px;
+    background: $secondary-color;
+}
+
+.logo {
+    color: $alt-font-color;
+    padding: 1em;
+}
+
+.nav {
+    ul {
+        padding-left: 0;
+        margin: 0;
+        text-align: right;
+
+        li {
+            display: inline-block;
+
+            a {
+                display: block;
+                padding: 1em;
+                font-weight: bold;
+                text-decoration: none;
+                color: $alt-font-color;
+
+                &:hover {
+                    background: $primary-color;
+                    transition: ease 0.3s;
+                }
+            }
+        }
+    }
 }

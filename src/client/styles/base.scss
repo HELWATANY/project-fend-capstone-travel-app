@@ -1,7 +1,12 @@
+@import "variables";
+
 body {
+    font-family: $font-stack;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: $bg-color;
+    color: $main-font-color;
 }
 
 main {
@@ -11,4 +16,31 @@ main {
 section {
     max-width: 800px;
     margin: 50px auto;
+}
+
+.result-section {
+    padding: 1em;
+    border: 1px dashed $primary-color;
+    border-radius: 5px;
+
+    #results {
+        padding: 10px;
+        background: darken($bg-color, 4%);
+    }
+}
+
+h1 {
+    padding: 10px;
+    background: darken($bg-color, 4%);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.info-text {
+    text-transform: capitalize;
+    margin-bottom: 0.5em;
+
+    .title {
+        font-weight: bold;
+    }
 }
