@@ -52,8 +52,8 @@ const server = app.listen(port, listening)
  * ROUTES
  */
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+    res.sendFile('dist/index.html')
+    // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 app.get('/test', function (req, res) {
