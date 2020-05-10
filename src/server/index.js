@@ -82,6 +82,8 @@ function handlePostStatement(req, res) {
     }, (error, response) => {
         if (error === null) {
             res.send(response);
+        } else {
+            console.log(error);
         }
     });
 }
