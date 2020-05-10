@@ -13,19 +13,19 @@ First, you will need to go [here](https://developer.aylien.com/signup). Signing 
 $ npm install
 ```
 
+## Start Server
+```bash
+$ npm run start
+```
+
 ## Run Project In Development Environment
 ```bash
-$ npm run build-dev && npm run start
+$ npm run build-dev
 ```
 
 ## Build Project For Production Environment
 ```bash
 $ npm run build-prod && npm run start
-```
-
-## Run Only The Serve
-```bash
-$ npm run start
 ```
 
 ## Run Jest Test
