@@ -18,14 +18,14 @@ $ npm install
 $ npm run start
 ```
 
-## Run Project In Development Environment
+## Build Project For Development Environment
 ```bash
 $ npm run build-dev
 ```
 
 ## Build Project For Production Environment
 ```bash
-$ npm run build-prod && npm run start
+$ npm run build-prod
 ```
 
 ## Run Jest Test
