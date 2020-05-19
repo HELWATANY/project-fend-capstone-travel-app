@@ -7,8 +7,12 @@ import './styles/footer.scss'
 
 import { validateForm } from './js/validateForm'
 import { handleSubmit } from './js/formHandler'
+import { events } from './js/events';
+import { serviceWorkers } from './js/serviceWorkers';
 
 export {
   validateForm,
-  handleSubmit
+  handleSubmit,
+  events,
+  serviceWorkers
 }

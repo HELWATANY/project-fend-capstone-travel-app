@@ -9,14 +9,14 @@ const path = require('path')
 const ip = require('ip')
 
 // Setup API mockup
-const mockAPIResponse = require('./mockAPI.js')
+// const mockAPIResponse = require('./mockAPI.js')
 
 // Setup Aylien SDK
-const aylien = require('aylien_textapi')
-let textapi = new aylien({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
-})
+// const aylien = require('aylien_textapi')
+// let textapi = new aylien({
+//     application_id: process.env.API_ID,
+//     application_key: process.env.API_KEY
+// })
 
 
 /**
@@ -57,7 +57,9 @@ app.get('/', function (req, res) {
 })
 
 app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
+    res.send({
+        msg: 'hi'
+    })
 })
 
 app.post('/sentiment-analysis',handlePostStatement)
@@ -75,15 +77,7 @@ function listening() {
 
 // Post new statement callback
 function handlePostStatement(req, res) {
-    const { text } = req.body
-    textapi.sentiment({
-        text,
-        mode: 'tweet'
-    }, (error, response) => {
-        if (error === null) {
-            res.send(response);
-        } else {
-            console.log(error);
-        }
-    });
+    res.send({
+        msg: 'analytics'
+    })
 }
