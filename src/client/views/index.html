@@ -1,75 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Sentiment Analysis</title>
-    </head>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+  <title>Travel App</title>
+</head>
 
-    <body>
+<body>
 
-        <header>
-            <div class="logo">
-                Sentiment Analysis
-            </div>
-            <div class="nav">
-                <ul>
-                    <li>
-                        <a href="#">
-                            Section 1
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Section 2
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Section 3
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </header>
+<header>
+  <div class="logo">
+    Sentiment Analysis
+  </div>
+</header>
 
-        <main>
-            <section>
-                <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <label for="name">Enter Statement You Want To Analysis</label>
-                    <input id="name" type="text" name="input" value="" placeholder="Statement">
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                </form>
-            <section>
+<main>
+  <section>
+    <form class="" onsubmit="return Client.handleSubmit(event)">
+      <label for="name">Enter Statement You Want To Analysis</label>
+      <input id="name" type="text" name="input" value="" placeholder="Statement">
+      <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
+    </form>
+  </section>
 
-            <section class="result-section">
-                <h1>Sentiment Analysis Results:</h1>
-                <div id="results">
-                    <p class="info-text">
-                        <span class="title">polarity: </span>
-                        <span id="polarity" class="info"></span>
-                    </p>
-                    <p class="info-text">
-                        <span class="title">polarity confidence: </span>
-                        <span id="polarity_confidence" class="info"></span>
-                    </p>
-                    <p class="info-text">
-                        <span class="title">subjectivity: </span>
-                        <span id="subjectivity" class="info"></span>
-                    </p>
-                    <p class="info-text">
-                        <span class="title">subjectivity confidence: </span>
-                        <span id="subjectivity_confidence" class="info"></span>
-                    </p>
-                </div>
-            </section>
-        </main>
+  <section class="result-section">
+    <h1>Sentiment Analysis Results:</h1>
+    <div id="results">
+      <p class="info-text">
+        <span class="title">polarity: </span>
+        <span id="polarity" class="info"></span>
+      </p>
+      <p class="info-text">
+        <span class="title">polarity confidence: </span>
+        <span id="polarity_confidence" class="info"></span>
+      </p>
+      <p class="info-text">
+        <span class="title">subjectivity: </span>
+        <span id="subjectivity" class="info"></span>
+      </p>
+      <p class="info-text">
+        <span class="title">subjectivity confidence: </span>
+        <span id="subjectivity_confidence" class="info"></span>
+      </p>
+    </div>
+  </section>
 
-        <footer>
-            <p>© Udacity</p>
-        </footer>
+  <div class="overlay">
+    <div id="modal" class="modal-wrapper">
+      <div class="modal">
+        <section class="modal-title">
+          <h4>Modal Title</h4>
+          <i id="closeModal">x</i>
+        </section>
+        <section class="modal-content">
+          <p>some content</p>
+        </section>
+        <section class="modal-footer">
+          <p>modal actions goes here</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
 
-        <script>
+<footer>
+  <p>© Udacity</p>
+</footer>
 
-        </script>
-    </body>
+<script>
+
+</script>
+</body>
 </html>

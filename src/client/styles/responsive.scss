@@ -1,0 +1,20 @@
+$breakpoints: (
+  phone: 480px,
+  tablet: 900px,
+  desktop: 1100px
+) !default;
+
+// Phones
+@include media("<=phone") {
+
+}
+
+// Tablets
+@include media(">phone", "<=tablet") {
+
+}
+
+// Tablets Landscape
+@include media(">tablet", "<=desktop") {
+
+}

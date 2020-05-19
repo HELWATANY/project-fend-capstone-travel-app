@@ -1,35 +1,35 @@
 @import "variables";
 
 form {
-    border: 1px solid $primary-color;
-    border-radius: 3px;
-    padding: 40px;
-    transition: ease 0.3s;
+  border: 1px solid $secondary-color;
+  border-radius: 3px;
+  padding: 40px;
+  transition: ease 0.3s;
 }
 
 input {
-    padding: 5px 20px;
-    width: 100%;
-    line-height: 16px;
-    margin: 10px 0;
+  padding: 5px 20px;
+  width: 100%;
+  line-height: 16px;
+  margin: 10px 0;
 
-    &[type=submit] {
-        background: $secondary-color;
-        color: $alt-font-color;
-        cursor: pointer;
-        border: 1px solid $secondary-color;
-        text-transform: capitalize;
+  &[type=submit] {
+    background: $primary-color;
+    color: $alt-font-color;
+    cursor: pointer;
+    border: 1px solid $primary-color;
+    text-transform: capitalize;
 
-        &:hover {
-            background: darken($secondary-color, 2.5%);
-            border: 1px solid darken($secondary-color, 2.5%);
-            transition: ease 0.3s;
-        }
-
-        &:active {
-            background: darken($secondary-color, 4.5%);
-            border: 1px solid darken($secondary-color, 4.5%);
-            transition: ease 0.3s;
-        }
+    &:hover {
+      background: darken($primary-color, 2.5%);
+      border: 1px solid darken($primary-color, 2.5%);
+      transition: ease 0.3s;
     }
+
+    &:active {
+      background: darken($primary-color, 4.5%);
+      border: 1px solid darken($primary-color, 4.5%);
+      transition: ease 0.3s;
+    }
+  }
 }

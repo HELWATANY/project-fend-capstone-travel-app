@@ -1,38 +1,38 @@
 @import "variables";
 
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 40px;
-    background: $secondary-color;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: $primary-color;
 }
 
 .logo {
-    color: $alt-font-color;
-    padding: 1em;
+  color: $alt-font-color;
+  padding: 1em;
 }
 
 .nav {
-    ul {
-        padding-left: 0;
-        margin: 0;
-        text-align: right;
+  ul {
+    padding-left: 0;
+    margin: 0;
+    text-align: right;
 
-        li {
-            display: inline-block;
+    li {
+      display: inline-block;
 
-            a {
-                display: block;
-                padding: 1em;
-                font-weight: bold;
-                text-decoration: none;
-                color: $alt-font-color;
+      a {
+        display: block;
+        padding: 1em;
+        font-weight: bold;
+        text-decoration: none;
+        color: $alt-font-color;
 
-                &:hover {
-                    background: $primary-color;
-                    transition: ease 0.3s;
-                }
-            }
+        &:hover {
+          background: $secondary-color;
+          transition: ease 0.3s;
         }
+      }
     }
+  }
 }
