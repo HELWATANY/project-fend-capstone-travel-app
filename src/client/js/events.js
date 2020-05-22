@@ -166,10 +166,9 @@ export const events = (() => {
     if (!ls.get('countries')) {
       const { geonames } = await asyncGet('http://localhost:8081/countries');
       if (geonames) {
+        countries = [...geonames];
         ls.set('countries', geonames);
       }
-
-      countries = geonames;
     } else {
       countries = ls.get('countries');
     }
