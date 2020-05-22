@@ -7,7 +7,6 @@
 </head>
 
 <body>
-
 <header>
   <div class="logo">
     Sentiment Analysis
@@ -15,14 +14,13 @@
 </header>
 
 <main>
-  <section>
-    <form class="" onsubmit="return Client.handleSubmit(event)">
-      <label for="name">Enter Statement You Want To Analysis</label>
-      <input id="name" type="text" name="input" value="" placeholder="Statement">
-      <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-    </form>
-  </section>
-
+  <div id="loader" class="loader-overlay">
+    <div class="loader-wrapper">
+      <div class="loader-container">
+        <div class="loader"></div>
+      </div>
+    </div>
+  </div>
   <section class="result-section">
     <h1>Sentiment Analysis Results:</h1>
     <div id="results">
@@ -45,18 +43,53 @@
     </div>
   </section>
 
-  <div class="overlay">
-    <div id="modal" class="modal-wrapper">
+  <div id="modal" class="overlay active">
+    <div class="modal-wrapper">
       <div class="modal">
         <section class="modal-title">
-          <h4>Modal Title</h4>
+          <h4>Plan Your Next Trip</h4>
           <i id="closeModal">x</i>
         </section>
         <section class="modal-content">
-          <p>some content</p>
+          <form id="tripForm">
+            <label for="departDate">Departing Date:</label>
+            <input type="date" id="departDate" name="departDate">
+            <label for="country">Country:</label>
+            <select name="country" id="country">
+              <option value="">Please Select A Country</option>
+            </select>
+            <label for="city">City:</label>
+            <select name="city" id="city" disabled>
+              <option value="">Please Select A Country First</option>
+            </select>
+          </form>
+          <section class="trip-info-wrapper">
+            <img id="tripImg" class="trip-img" src="https://via.placeholder.com/640x640.png?text=Image" />
+            <div class="trip-info">
+              <h2>
+                My Trip To: <spna id="cityName">-----</spna>, <span id="countryName">-----</span> <br />
+              </h2>
+              <h2>
+                Departing: <span id="departingDate">--/--/----</span>
+              </h2>
+              <p class="info-text">
+                <span class="title">my trip is</span>
+                <span class="info">
+                  <span id="countdown">-----</span> days away!
+                </span>
+              </p>
+              <p class="info-text">
+                <span class="title">Typical weather for then is: </span>
+              </p>
+              <p class="info-text">
+                <span id="weatherInfo" class="info">-----</span>
+              </p>
+            </div>
+          </section>
         </section>
         <section class="modal-footer">
-          <p>modal actions goes here</p>
+          <button id="cancel" class="button secondary outline">Cancel</button>
+          <button id="save" class="button">Save Trip</button>
         </section>
       </div>
     </div>

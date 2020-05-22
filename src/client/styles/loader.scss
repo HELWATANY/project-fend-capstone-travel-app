@@ -1,0 +1,52 @@
+@import "variables";
+$color: $primary-color !default;
+$size: 56px !default;
+$border-size: 8px !default;
+$duration: 1s !default;
+
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.38);
+  z-index: 3;
+  display: none;
+}
+
+.loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  transition: ease 0.3s;
+
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    width: $size;
+    height: $size;
+
+    .loader {
+      width: $size;
+      height: $size;
+      border: $border-size solid rgba($color, 0.25);
+      border-top-color: $color;
+      border-radius: 50%;
+      position: relative;
+      animation: loader-rotate $duration linear infinite;
+      @keyframes loader-rotate {
+        0% {
+          transform: rotate(0);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}

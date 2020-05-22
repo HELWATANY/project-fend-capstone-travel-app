@@ -8,13 +8,16 @@ const path = require('path');
 // Set IP
 const ip = require('ip');
 
+// Fetch
+const fetch = require("node-fetch");
+
 // Setup API mockup
 // const mockAPIResponse = require('./mockAPI.js')
 
 // Setup Geonames SDK
 const Geonames = require('geonames.js');
 const geonames = new Geonames({
-    username: process.env.USERNAME,
+    username: process.env.GEONAMES_USER,
     lan: 'en',
     encoding: 'JSON'
 });
@@ -67,6 +70,10 @@ app.get('/countries', handleGetCountries);
 
 app.post('/cities', handleGetCountryCities);
 
+app.post('/weather', handleGetCityWeather);
+
+app.post('/image', handleSearchImage);
+
 
 /**
  * CALLBACK FUNCTIONS
@@ -79,7 +86,7 @@ function listening() {
 }
 
 // Get countries callback
-async function handleGetCountries(res) {
+async function handleGetCountries(req, res) {
     try {
         const countries = await geonames.countryInfo({}); //get continents
         res.status(200).send(countries);
@@ -99,6 +106,36 @@ async function handleGetCountryCities(req, res) {
         res.status(200).send(cities);
     } catch(err) {
         res.status(400).send('Failed to connect to Geonames remote server');
+        console.error(err);
+    }
+}
+
+// Get weather by lat, lng
+async function handleGetCityWeather(req, res) {
+    const key = process.env.WEATHERBIT_KEY;
+    try {
+        const { lat, lon } = req.body
+        const url = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${key}`;
+        const response = await fetch(url);
+        const json = await response.json();
+        res.status(200).send(json);
+    } catch(err) {
+        res.status(400).send('Failed to connect to Weatherbit remote server');
+        console.error(err);
+    }
+}
+
+// Get weather by lat, lng
+async function handleSearchImage(req, res) {
+    const key = process.env.PIXABAY_KEY;
+    try {
+        const { q } = req.body
+        const url = `https://pixabay.com/api/?key=${key}&q=${q}`;
+        const response = await fetch(url);
+        const json = await response.json();
+        res.status(200).send(json);
+    } catch(err) {
+        res.status(400).send('Failed to connect to Pixabay remote server');
         console.error(err);
     }
 }

@@ -28,4 +28,75 @@ const asyncGet = async (url = '') => {
   }
 };
 
-export { asyncPost, asyncGet }
+// Localstorage
+const ls = {
+  get (key, notFoundVal = null) {
+    if(typeof(Storage) !== 'undefined') {
+      let val = localStorage.getItem(key);
+      if (val) {
+        try {
+          JSON.parse(val);
+        } catch (e) {
+          return val;
+        }
+        return JSON.parse(val);
+      } else {
+        return notFoundVal
+      }
+    }
+  },
+  set (key, val) {
+    if(typeof(Storage) !== 'undefined') {
+      // check if array or object
+      if (typeof(val) === 'object' && val !== null) {
+        localStorage.setItem(key, JSON.stringify(val));
+      } else {
+        localStorage.setItem(key, val);
+      }
+    }
+  },
+  remove (key) {
+    if(typeof(Storage) !== 'undefined') {
+      localStorage.removeItem(key);
+    }
+  }
+};
+
+const showElement = (elementId, className = 'active') => {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.classList.add(className);
+  }
+};
+
+const hideElement = (elementId, className = 'active') => {
+  const el = document.getElementById(elementId);
+  if (el) {
+    setTimeout(() => {
+      el.classList.remove(className);
+    }, 800);
+  }
+};
+
+const formatDate= (date) => {
+  let d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [year, month, day].join('-');
+};
+
+export {
+  asyncPost,
+  asyncGet,
+  showElement,
+  hideElement,
+  formatDate,
+  ls
+}
