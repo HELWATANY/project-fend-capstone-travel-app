@@ -154,7 +154,7 @@ function handleSaveTrip () {
 export const events = (() => {
   window.addEventListener('load', async () => {
     let currentDate = new Date();
-    let countries = ls.get('countries');
+    let countries = [];
     let countryEl = document.getElementById('country');
     let cityEl = document.getElementById('city');
     let departDateEl = document.getElementById('departDate');
@@ -168,6 +168,10 @@ export const events = (() => {
       if (geonames) {
         ls.set('countries', geonames);
       }
+
+      countries = geonames;
+    } else {
+      countries = ls.get('countries');
     }
 
     if (countries && countryEl) {
