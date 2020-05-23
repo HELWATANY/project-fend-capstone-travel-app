@@ -5,6 +5,7 @@ import './styles/header.scss';
 import './styles/form.scss';
 import './styles/footer.scss';
 import './styles/loader.scss';
+import './styles/responsive.scss';
 
 
 import { events } from './js/events';

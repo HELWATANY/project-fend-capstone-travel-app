@@ -1,20 +1,84 @@
-$breakpoints: (
-  phone: 480px,
-  tablet: 900px,
-  desktop: 1100px
-) !default;
+$phone: 480px;
+$phoneLandscape: 640px;
+$tablet: 900px;
+$desktop: 1100px;
+
 
 // Phones
-@include media("<=phone") {
+@media(max-width: $phone) {
+  .trip-info-wrapper {
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: normal;
 
+    .trip-img {
+      flex: 1;
+      width: 100%;
+    }
+
+    .trip-info {
+      flex: 1;
+      width: 100%;
+
+      .button {
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+
+  .overlay {
+    overflow: hidden;
+  }
+
+  .modal-wrapper {
+    .modal {
+      width: 95%;
+      height: 95%;
+      min-height: auto;
+      .modal-content {
+        overflow-x: scroll;
+      }
+    }
+  }
+}
+
+// Phones Landscape
+@media(min-width: $phone + 1) and (max-width: $phoneLandscape) {
+  .trip-info-wrapper {
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: normal;
+
+    .trip-img {
+      flex: 1;
+      width: 100%;
+    }
+
+    .trip-info {
+      flex: 1;
+      width: 100%;
+    }
+  }
+
+  .modal-wrapper {
+    .modal {
+      width: 95%;
+      height: 95%;
+      min-height: auto;
+      .modal-content {
+        overflow-x: scroll;
+      }
+    }
+  }
 }
 
 // Tablets
-@include media(">phone", "<=tablet") {
+@media(min-width: $phoneLandscape + 1) and (max-width: $tablet) {
 
 }
 
 // Tablets Landscape
-@include media(">tablet", "<=desktop") {
+@media(min-width: $tablet + 1) and (max-width: $desktop) {
 
 }

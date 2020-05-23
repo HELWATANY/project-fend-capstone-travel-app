@@ -73,6 +73,7 @@ async function handleCitySelect (event) {
     // display loader
     showElement('loader');
     let cityName = event.target.options[event.target.selectedIndex].text;
+    cityNameEl.innerHTML = cityName;
     const latLng = value.split(',');
 
     // get country's cities
@@ -95,7 +96,6 @@ async function handleCitySelect (event) {
     }
 
     // hide loader
-    cityNameEl.innerHTML = cityName;
     hideElement('loader');
   }
 
@@ -106,10 +106,20 @@ async function handleDepartDateChange (event) {
   const departingDateEl = document.getElementById('departingDate');
   departingDateEl.innerHTML = '';
 
+  const countdown = document.getElementById('countdown');
+  countdown.innerHTML = ''
+
   if (value) {
     let selectedDate = new Date(value);
     departingDateEl.innerHTML = selectedDate.toLocaleDateString();
+    countdown.innerHTML = `${calculateCountDown(value)}`;
   }
+}
+
+function calculateCountDown(date) {
+  let currentDate = new Date();
+  let travelDate = new Date(date);
+  return Math.floor((Date.UTC(travelDate.getFullYear(), travelDate.getMonth(), travelDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) ) /(1000 * 60 * 60 * 24));
 }
 
 function handleSaveTrip () {
@@ -130,14 +140,14 @@ function handleSaveTrip () {
     alert('Country Is Required!');
     return;
   } else {
-    country = countryEl.options[countryEl.selectedIndex];
+    country = countryEl.options[countryEl.selectedIndex].text;
   }
 
   if (!cityEl.value) {
     alert('City Is Required!');
     return;
   } else {
-    city = cityEl.options[cityEl.selectedIndex];
+    city = cityEl.options[cityEl.selectedIndex].text;
   }
 
   const tripInfo = {
@@ -148,7 +158,123 @@ function handleSaveTrip () {
     image
   };
 
-  ls.set('tripInfo', tripInfo);
+  let myTrips = ls.get('my_trips', []);
+  myTrips.push(tripInfo);
+  ls.set('my_trips', myTrips);
+
+  handleCloseModal();
+  setTimeout(() => {
+    handleMyTripsRender();
+  }, 900);
+}
+
+function handleAddTrip() {
+  showElement('modal');
+}
+
+function handleCloseModal() {
+  hideElement('modal');
+
+  setTimeout(() => {
+    let departDateEl = document.getElementById('departDate');
+    departDateEl.value = '';
+
+    let departingDateEl = document.getElementById('departingDate');
+    departingDateEl.innerHTML = '';
+
+    let countryEl = document.getElementById('country');
+    countryEl.selectedIndex = 0
+
+    let countryNameEl = document.getElementById('countryName');
+    countryNameEl.innerHTML = '';
+
+    let cityEl = document.getElementById('city');
+    cityEl.innerHTML = ''; // clear all options
+    cityEl.disabled = true;
+
+    let cityNameEl = document.getElementById('cityName');
+    cityNameEl.innerHTML = '';
+
+    let tripImgEl = document.getElementById('tripImg');
+    tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=Image');
+
+    let weatherInfo = document.getElementById('weatherInfo');
+    weatherInfo.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
+
+    const optionElement = document.createElement('option');
+    optionElement.setAttribute('value', '');
+    optionElement.innerHTML = 'Please Select A Country First';
+    fragment.appendChild(optionElement);
+    cityEl.appendChild(fragment);
+  }, 850);
+}
+
+function handleMyTripsRender () {
+  const tripsContainer = document.getElementById('myTrips');
+  tripsContainer.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+  const myTrips = ls.get('my_trips', []);
+  if (myTrips.length > 0) {
+    myTrips.forEach((trip, index) => {
+      let tripDate = new Date(trip.date);
+      let tripCountdown = calculateCountDown(trip.date);
+      let template = `
+      <div class="trip-img">
+          <img src="${trip.image}" />
+        </div>
+      <div class="trip-info">
+        <h2>
+          My Trip To: <spna>${trip.city}</spna>, <span>${trip.country}</span> <br />
+        </h2>
+        <h2>
+          Departing: <span>${tripDate.toLocaleDateString()}</span>
+        </h2>
+        <p class="info-text">
+          <span class="title">my trip is</span>
+          <span class="info">
+              <span>${tripCountdown}</span> days away!
+            </span>
+        </p>
+        <p class="info-text">
+          <span class="title">Typical weather for then is: </span>
+        </p>
+        <p class="info-text">
+          <span class="info">${trip.weather}</span>
+        </p>
+        <button data-index="${index}" class="button primary outline delete-trip">Delete</button>
+      </div>
+    `;
+      let tripContainer = document.createElement('div');
+      tripContainer.className = 'trip-info-wrapper';
+      tripContainer.innerHTML = template;
+      fragment.appendChild(tripContainer);
+    });
+
+    tripsContainer.appendChild(fragment);
+
+    let deleteButtons = document.getElementsByClassName('delete-trip');
+    for (let i = 0; i < deleteButtons.length; i++) {
+      deleteButtons[i].addEventListener('click', handleDeleteTrip);
+    }
+  } else {
+    tripsContainer.innerHTML = `
+      <div id="tripFiller" class="trip-filler active">
+        <h1>Start Adding Trips To List It Here!</h1>
+      </div>
+  `;
+  }
+}
+
+function handleDeleteTrip(event) {
+  let tripIndex = event.target.getAttribute('data-index');
+  let myTrips = ls.get('my_trips');
+  if (tripIndex > -1) {
+    myTrips.splice(tripIndex, 1);
+  }
+  ls.set('my_trips', myTrips);
+  handleMyTripsRender();
 }
 
 export const events = (() => {
@@ -161,6 +287,16 @@ export const events = (() => {
     let tripForm = document.getElementById('tripForm');
     let saveTrip = document.getElementById('save');
     let cancelTrip = document.getElementById('cancel');
+    let addNewTrip = document.getElementById('addNewTrip')
+    let closeModal = document.getElementById('closeModal');
+
+
+    // Check for trips list
+    if (!ls.get('my_trips')) {
+      ls.set('my_trips', []);
+    } else {
+      handleMyTripsRender();
+    }
 
     // Check for countries cache
     if (!ls.get('countries')) {
@@ -209,15 +345,15 @@ export const events = (() => {
     }
 
     if (cancelTrip) {
-      cancelTrip.addEventListener('click', () => {
-        tripInfo = {
-          country: '',
-          city: '',
-          date: '',
-          image: '',
-          weather: ''
-        };
-      });
+      cancelTrip.addEventListener('click', handleCloseModal);
+    }
+
+    if (closeModal) {
+      closeModal.addEventListener('click', handleCloseModal);
+    }
+
+    if (addNewTrip) {
+      addNewTrip.addEventListener('click', handleAddTrip);
     }
 
   });

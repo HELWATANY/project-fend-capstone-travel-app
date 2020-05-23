@@ -9,11 +9,52 @@
 <body>
 <header>
   <div class="logo">
-    Sentiment Analysis
+    Travel App
   </div>
 </header>
 
 <main>
+  <div class="content-wrapper">
+    <section class="trips-wrapper">
+      <div class="title">
+        <h1 class="item">My Trips</h1>
+        <button class="item button" id="addNewTrip">Add New Trip</button>
+      </div>
+
+      <div id="myTrips" class="trips-container">
+<!--        <div id="tripFiller" class="trip-filler active">-->
+<!--          <h1>Start Adding Trips To List It Here!</h1>-->
+<!--        </div>-->
+
+<!--        <div class="trip-info-wrapper">-->
+<!--          <div class="trip-img">-->
+<!--            <img src="https://via.placeholder.com/640x640.png?text=Image" />-->
+<!--          </div>-->
+<!--          <div class="trip-info">-->
+<!--            <h2>-->
+<!--              My Trip To: <spna>-&#45;&#45;&#45;&#45;</spna>, <span>-&#45;&#45;&#45;&#45;</span> <br />-->
+<!--            </h2>-->
+<!--            <h2>-->
+<!--              Departing: <span>&#45;&#45;/&#45;&#45;/&#45;&#45;&#45;&#45;</span>-->
+<!--            </h2>-->
+<!--            <p class="info-text">-->
+<!--              <span class="title">my trip is</span>-->
+<!--              <span class="info">-->
+<!--                  <span>-&#45;&#45;&#45;&#45;</span> days away!-->
+<!--                </span>-->
+<!--            </p>-->
+<!--            <p class="info-text">-->
+<!--              <span class="title">Typical weather for then is: </span>-->
+<!--            </p>-->
+<!--            <p class="info-text">-->
+<!--              <span class="info">-&#45;&#45;&#45;&#45;</span>-->
+<!--            </p>-->
+<!--            <button class="button primary outline">Delete</button>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </section>
+  </div>
   <div id="loader" class="loader-overlay">
     <div class="loader-wrapper">
       <div class="loader-container">
@@ -21,29 +62,7 @@
       </div>
     </div>
   </div>
-  <section class="result-section">
-    <h1>Sentiment Analysis Results:</h1>
-    <div id="results">
-      <p class="info-text">
-        <span class="title">polarity: </span>
-        <span id="polarity" class="info"></span>
-      </p>
-      <p class="info-text">
-        <span class="title">polarity confidence: </span>
-        <span id="polarity_confidence" class="info"></span>
-      </p>
-      <p class="info-text">
-        <span class="title">subjectivity: </span>
-        <span id="subjectivity" class="info"></span>
-      </p>
-      <p class="info-text">
-        <span class="title">subjectivity confidence: </span>
-        <span id="subjectivity_confidence" class="info"></span>
-      </p>
-    </div>
-  </section>
-
-  <div id="modal" class="overlay active">
+  <div id="modal" class="overlay">
     <div class="modal-wrapper">
       <div class="modal">
         <section class="modal-title">
@@ -64,7 +83,9 @@
             </select>
           </form>
           <section class="trip-info-wrapper">
-            <img id="tripImg" class="trip-img" src="https://via.placeholder.com/640x640.png?text=Image" />
+            <div class="trip-img">
+              <img id="tripImg" src="https://via.placeholder.com/640x640.png?text=Image" />
+            </div>
             <div class="trip-info">
               <h2>
                 My Trip To: <spna id="cityName">-----</spna>, <span id="countryName">-----</span> <br />
@@ -99,9 +120,5 @@
 <footer>
   <p>© Udacity</p>
 </footer>
-
-<script>
-
-</script>
 </body>
 </html>
