@@ -13,7 +13,7 @@ async function handleCountrySelect(event) {
   cityNameEl.innerHTML = ''
 
   let tripImgEl = document.getElementById('tripImg');
-  tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=Image');
+  tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=Image+Place+Holder');
 
   let weatherInfo = document.getElementById('weatherInfo');
   weatherInfo.innerHTML = '';
@@ -66,7 +66,7 @@ async function handleCitySelect (event) {
   weatherInfo.innerHTML = '';
 
   let tripImgEl = document.getElementById('tripImg');
-  tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=Image');
+  tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=No+Image+Found');
 
 
   if (value) {
@@ -277,7 +277,7 @@ function handleDeleteTrip(event) {
   handleMyTripsRender();
 }
 
-export const events = (() => {
+export const app = (() => {
   window.addEventListener('load', async () => {
     let currentDate = new Date();
     let countries = [];

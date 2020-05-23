@@ -8,10 +8,10 @@ import './styles/loader.scss';
 import './styles/responsive.scss';
 
 
-import { events } from './js/events';
+import { app } from './js/app';
 import { serviceWorkers } from './js/serviceWorkers';
 
 export {
-  events,
+  app,
   serviceWorkers
 }

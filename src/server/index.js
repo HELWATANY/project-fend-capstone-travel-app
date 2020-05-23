@@ -1,6 +1,7 @@
 // Set DotEnv
 const dotenv = require('dotenv');
 dotenv.config();
+let server = undefined;
 
 // Set Path
 const path = require('path');
@@ -49,7 +50,7 @@ app.use(express.static('dist'))
 const port = 8081
 
 // Setup Server
-const server = app.listen(port, listening)
+// const server = app.listen(port, listening)
 
 
 /**
@@ -139,3 +140,32 @@ async function handleSearchImage(req, res) {
         console.error(err);
     }
 }
+
+async function start() {
+    server = app.listen(port, listening)
+    return new Promise((resolve, reject) => {
+        server.on('error', (err) => {
+            reject(err);
+        });
+
+        server.on('listening', () => {
+            resolve();
+        });
+
+    });
+}
+
+function stop(){
+    if (server.listening) {
+        server.close();
+    }
+}
+
+if (!module.parent) {
+    start();
+}
+
+module.exports = {
+    start,
+    stop
+};
