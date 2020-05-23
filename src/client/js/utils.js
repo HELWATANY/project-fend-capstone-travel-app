@@ -92,11 +92,18 @@ const formatDate= (date) => {
   return [year, month, day].join('-');
 };
 
+const calculateCountDown = (date) => {
+  let currentDate = new Date();
+  let travelDate = new Date(date);
+  return Math.floor((Date.UTC(travelDate.getFullYear(), travelDate.getMonth(), travelDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) ) /(1000 * 60 * 60 * 24));
+}
+
 export {
   asyncPost,
   asyncGet,
   showElement,
   hideElement,
   formatDate,
+  calculateCountDown,
   ls
 }

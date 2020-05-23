@@ -1,11 +1,18 @@
-# Evaluate a News Article with Natural Language Processing
+# Travel App
 
-## Setting up the API
+## Extend Options:
+[x] Cache countries list in the Localstorage
+[x] Pull in an image for the country from Pixabay API when the entered location brings up no results (good for obscure localities).
+[x] Use Local Storage to save the data so that when they close, then revisit the page, their information is still there.
+[x] Allow the user to remove the trip.
 
-The Aylien API is perhaps different than what you've used before. It has you install a node module to run certain commands through, it will simplify the requests we need to make from our node/express backend.
-
-### Signup for an API key
-First, you will need to go [here](https://developer.aylien.com/signup). Signing up will get you an API key. Don't worry, at the time of this course, the API is free to use up to 1000 requests per day or 333 intensive requests. It is free to check how many requests you have remaining for the day.
+## Setting up the APIs
+A `.env` file should be created with the following structure
+```bash
+GEONAMES_USER=genonames_api_username
+WEATHERBIT_KEY=weatherbit_api_key
+PIXABAY_KEY=pixabay_api_key
+```
 
 
 ## Install Dependencies

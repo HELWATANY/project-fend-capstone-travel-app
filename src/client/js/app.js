@@ -1,4 +1,4 @@
-import {asyncGet, asyncPost, formatDate, hideElement, ls, showElement} from './utils';
+import {asyncGet, asyncPost, formatDate, hideElement, ls, showElement, calculateCountDown} from './utils';
 
 async function handleCountrySelect(event) {
   const { value } = event.target;
@@ -66,8 +66,7 @@ async function handleCitySelect (event) {
   weatherInfo.innerHTML = '';
 
   let tripImgEl = document.getElementById('tripImg');
-  tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=No+Image+Found');
-
+  tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=Image+Place+Holder');
 
   if (value) {
     // display loader
@@ -88,11 +87,22 @@ async function handleCitySelect (event) {
       ${weatherData.weather.description}`;
     }
 
-    const imageRes = await asyncPost('http://localhost:8081/image', {q: cityName.replace(/ /g,"+")});
+    let imageData = undefined;
+    const cityImage = await asyncPost('http://localhost:8081/image', {q: cityName.replace(/ /g,"+")});
 
-    if (imageRes && imageRes.total > 0) {
-      let imageData = imageRes.hits[0];
+    if (cityImage && cityImage.total > 0) {
+      imageData = cityImage.hits[0];
       tripImgEl.setAttribute('src', imageData.webformatURL);
+    } else {
+      let countryName = countryEl.options[countryEl.selectedIndex].text;
+      const countryImage = await asyncPost('http://localhost:8081/image', {q: countryName.replace(/ /g,"+")});
+
+      if (countryImage && countryImage.total > 0) {
+        imageData = countryImage.hits[0];
+        tripImgEl.setAttribute('src', imageData.webformatURL);
+      } else {
+        tripImgEl.setAttribute('src', 'https://via.placeholder.com/640x640.png?text=No+Image+Found');
+      }
     }
 
     // hide loader
@@ -114,12 +124,6 @@ async function handleDepartDateChange (event) {
     departingDateEl.innerHTML = selectedDate.toLocaleDateString();
     countdown.innerHTML = `${calculateCountDown(value)}`;
   }
-}
-
-function calculateCountDown(date) {
-  let currentDate = new Date();
-  let travelDate = new Date(date);
-  return Math.floor((Date.UTC(travelDate.getFullYear(), travelDate.getMonth(), travelDate.getDate()) - Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) ) /(1000 * 60 * 60 * 24));
 }
 
 function handleSaveTrip () {
